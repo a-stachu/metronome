@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SETTINGS</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:700">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/main.css">
+
+</head>
+<body>
+
+<div class="header">
+    <h1>Settings</h1>
+</div>
+
+    <form action = "/metronome-data" method = "post">
+
+        <div class="range-slider">
+            <p><span style="color:#FF0077; font-size: 30px" id="value_tempo"></span></p>
+            <input type = "range" name = "tempo" min="1" max="400" value="120" id="range_tempo">
+            <label for="tempo">Tempo</label>
+        </div>
+
+        <p></p>
+
+        <div class="range-slider">
+            <p><span style="color:#FF0077; font-size: 30px" id="value_beats" ></span></p>
+            <input type = "range" name = "beats" min="1" max="12" value="4" id="range_beats">
+            <label for="beats">Beats</label>
+        </div>
+
+        <p></p>
+
+        <button class="button button-metronome" input type = "submit"><i class = "fa fa-play"></i></button>
+    </form>
+
+<script>
+    var slider_beats = document.getElementById("range_beats");
+    var slider_tempo = document.getElementById("range_tempo");
+
+    var output_beats = document.getElementById("value_beats");
+    var output_tempo = document.getElementById("value_tempo");
+
+    output_beats.innerHTML = slider_beats.value;
+    output_tempo.innerHTML = slider_tempo.value;
+
+    slider_beats.oninput = function(){
+    output_beats.innerHTML = this.value;
+    };
+
+    slider_tempo.oninput = function(){
+        output_tempo.innerHTML = this.value;
+    };
+
+</script>
+
+</body>
+</html>

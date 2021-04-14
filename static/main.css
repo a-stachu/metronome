@@ -1,0 +1,37 @@
+body{
+    font-family: Mukta;
+    padding: 30px;
+    background: #161316;
+    color: white;
+    text-align: center;
+}
+
+.header{
+    text-align: center;
+    color: white;
+    font-size: 30px;
+}
+
+.button {
+    font-family: Mukta;
+    border: none;
+    padding: 12px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.button-metronome {
+    background-color: #161316;
+    color: #FF0077;
+    border: 2px solid #FF0077;
+}
+
+.button-metronome:hover {
+    background-color: #FF0077;
+    color: white;
+}

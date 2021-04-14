@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>METRONOME-PLAYING</title>
+
+    <link rel="stylesheet" href="/static/main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:700">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://unpkg.com/tone"></script>
+    <script src="http://code.jquery.com/jquery-3.6.0.js"></script>
+</head>
+<body>
+
+    <div class="header">
+        <p>Press this to play/pause</p>
+    </div>
+
+    <a href="/metronome-data"><button class="button button-metronome"><i class = "fa fa-cog"></i></button></a>
+    <a href="/"><button class="button button-metronome"><i class = "fa fa-home"></i></button></a>
+
+    <script>
+
+        $(document).ready(function() {
+           /* "connect the player output to the computer's audio output" */
+
+        const synth = new Tone.MonoSynth({
+            oscillator: {
+                type: "square"
+            },
+            envelope: {
+                attack: 0.01,
+                decay: 0,
+                sustain: 0.5,
+                release: 0.01
+            }
+        }).toMaster();
+
+           Tone.Transport.bpm.value = {{tempo}}; // tempo
+           BEATS = {{beats}}; //beats
+
+
+        if (BEATS == 1){
+            notes_by_beat = ["A4"];
+        } else { // ["A5", "A4", "A4" etc]
+            notes_by_beat = ["A5"]; //
+            for (var i = 0; i < BEATS-1; i++){
+                notes_by_beat.push("A4");
+            }
+           }
+           beat_count = 0; // counting beats
+
+        /* loop with tones */
+        const loop = new Tone.Loop(function (time) {
+
+            the_note = notes_by_beat[beat_count++ % notes_by_beat.length];
+            synth.triggerAttackRelease(the_note, 0.05, time);
+
+          //  Tone.Draw.schedule(() => {
+          //      console.log(time);
+          //      });
+          //  }, time);
+
+        }, "4n").start(0);
+
+        let playing = false;
+
+        document.querySelector("body").addEventListener("click", function () {
+
+            if (!playing) {
+                // reload audio context
+                Tone.context.resume();
+                Tone.Transport.start();
+                playing = true;
+            } else {
+                Tone.Transport.pause();
+                playing = false;
+            }
+  });
+});
+
+</script>
+
+</body>
+</html>

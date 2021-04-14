@@ -1,0 +1,10 @@
+{
+  "name": "flaskProject1",
+  "version": "1.0.0",
+  "dependencies": {
+    "jquery": "^3.6.0"
+  },
+  "devDependencies": {
+    "animejs": "^3.2.1"
+  }
+}
